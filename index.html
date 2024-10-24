@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Faz a imagem ocupar toda a tela */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Mantém a proporção da imagem enquanto preenche a tela */
+        }
+    </style>
+</head>
+<body>
+    <!-- Exibe a imagem ocupando toda a tela -->
+    <img src="200reais-mae.png" alt="Cédula de 200 reais">
+
+    <!-- Script para o efeito de confete -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        function startConfetti() {
+            confetti({
+                particleCount: 200,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Inicia o confete e envia uma notificação via webhook
+        window.onload = function() {
+            startConfetti();
+
+            // Envia notificação via webhook
+            fetch('https://hook.us2.make.com/plm72072yj3gnb67ldp1f15iqeebglon', { // Novo webhook URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: 'Sua mãe acessou o presente: Cédula de 200 reais!'
+                })
+            });
+        };
+    </script>
+</body>
+</html>
